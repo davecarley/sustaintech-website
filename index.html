@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SustainTech | AI Strategy & Green Tech Advisory</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep: #1a3a2a;
+      --green-mid: #2d6a4f;
+      --green-bright: #52b788;
+      --green-light: #b7e4c7;
+      --green-pale: #f0faf4;
+      --white: #ffffff;
+      --ink: #111c17;
+      --muted: #5a7066;
+      --border: #d8ede2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 6vw;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--green-deep);
+      letter-spacing: -0.01em;
+    }
+
+    .logo span { color: var(--green-bright); }
+
+    nav ul {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--green-mid); }
+
+    .nav-cta {
+      background: var(--green-mid);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--green-deep) !important; color: var(--white) !important; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 6vw 5rem;
+      background: var(--green-pale);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(82,183,136,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-bg-circle.c1 { width: 600px; height: 600px; top: -100px; right: -80px; }
+    .hero-bg-circle.c2 { width: 400px; height: 400px; bottom: -80px; left: 10%; opacity: 0.6; }
+
+    .hero-content {
+      max-width: 700px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 24px; height: 2px;
+      background: var(--green-bright);
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--green-deep);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--green-mid);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--green-mid);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--green-deep); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green-mid);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1.5px solid var(--green-mid);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { background: var(--green-mid); color: var(--white); }
+
+    /* SERVICES */
+    #services {
+      padding: 7rem 6vw;
+      background: var(--white);
+    }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: var(--green-deep);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-intro {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      background: var(--white);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green-bright), var(--green-mid));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .service-card:hover {
+      border-color: var(--green-light);
+      box-shadow: 0 12px 40px rgba(45,106,79,0.1);
+      transform: translateY(-3px);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+
+    .service-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--green-deep);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      background: var(--green-pale);
+      border: 1px solid var(--green-light);
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 7rem 6vw;
+      background: var(--green-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(82,183,136,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    .about-left .section-label { color: var(--green-bright); }
+
+    .about-left .section-title { color: var(--white); }
+
+    .about-left p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat {
+      padding: 1.5rem;
+      border: 1px solid rgba(82,183,136,0.25);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.25rem;
+      color: var(--green-bright);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+    }
+
+    .about-values {
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+
+    .value-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+    }
+
+    .value-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(82,183,136,0.12);
+      border-radius: 10px;
+    }
+
+    .value-item h4 {
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .value-item p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 7rem 6vw;
+      background: var(--green-pale);
+    }
+
+    .contact-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-title { margin-bottom: 1rem; }
+
+    .contact-inner p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1rem;
+      text-align: left;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green-bright);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      margin-top: 0.5rem;
+    }
+
+    .form-submit button {
+      width: 100%;
+      padding: 1rem;
+      background: var(--green-mid);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .form-submit button:hover { background: var(--green-deep); transform: translateY(-1px); }
+
+    .contact-alt {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .contact-alt a { color: var(--green-mid); text-decoration: none; font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 6vw;
+      background: var(--green-deep);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      color: var(--white);
+      font-size: 1.1rem;
+    }
+
+    .footer-logo span { color: var(--green-bright); }
+
+    footer p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Sustain<span>Tech</span></div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">AI Strategy &amp; Green Tech Advisory</div>
+      <h1>Where <em>intelligent</em> technology meets sustainable impact</h1>
+      <p class="hero-sub">
+        SustainTech helps organizations unlock the real value of AI — aligning high-impact use cases to what matters most for the business, while keeping an eye on the future of green technology.
+      </p>
+      <div class="btn-group">
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact" class="btn-secondary">Let's Talk</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="reveal">
+      <div class="section-label">What I Do</div>
+      <h2 class="section-title">Services</h2>
+      <p class="section-intro">Practical, strategic guidance — not buzzwords. I help you figure out where AI and clean tech actually move the needle.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🧠</div>
+        <h3>AI Strategy Consulting</h3>
+        <p>I work with leadership teams to identify high-value AI opportunities that are grounded in real business priorities — not hype. From use case discovery to roadmap development, I help organizations move from curiosity to confident action.</p>
+        <div class="service-tags">
+          <span class="tag">Use Case Discovery</span>
+          <span class="tag">AI Roadmapping</span>
+          <span class="tag">Executive Advisory</span>
+        </div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="service-icon">🌿</div>
+        <h3>Green Tech Advisory</h3>
+        <p>Exploring the intersection of technology and sustainability. I provide early-stage advisory for organizations navigating the evolving green tech landscape — from climate tech investments to sustainable digital transformation.</p>
+        <div class="service-tags">
+          <span class="tag">Climate Tech</span>
+          <span class="tag">Sustainable Strategy</span>
+          <span class="tag">Advisory</span>
+        </div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="service-icon">🎯</div>
+        <h3>Workshops &amp; Speaking</h3>
+        <p>Hands-on sessions and keynotes that demystify AI for business audiences. I translate complex AI concepts into actionable insight your teams can actually use — without the jargon.</p>
+        <div class="service-tags">
+          <span class="tag">Executive Workshops</span>
+          <span class="tag">Team Training</span>
+          <span class="tag">Keynote</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Strategic clarity in a noisy landscape</h2>
+        <p>SustainTech was founded on a simple belief: that AI should serve real business outcomes, not the other way around. I bring a practitioner's perspective — helping organizations cut through the noise and focus on what actually creates value.</p>
+        <p>Whether you're just beginning your AI journey or looking to accelerate it, I meet you where you are and build a path forward that's grounded, practical, and aligned to your goals.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num">AI-first</span>
+            <span class="stat-label">Strategy, not tools</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">🍁 CA</span>
+            <span class="stat-label">Based in Canada</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-values reveal" style="transition-delay:0.15s">
+        <div class="value-item">
+          <div class="value-icon">⚡</div>
+          <div>
+            <h4>Business-First Thinking</h4>
+            <p>Every AI initiative starts with the business problem, not the technology. I help you identify where AI creates real leverage.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🔍</div>
+          <div>
+            <h4>Practical Over Theoretical</h4>
+            <p>No ivory tower strategy decks. I focus on what you can actually build, pilot, and scale within your organization.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🌱</div>
+          <div>
+            <h4>Long-Term Sustainability</h4>
+            <p>Whether it's AI governance or green tech, I believe the best technology strategies are the ones that last.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Ready to explore what's possible?</h2>
+        <p>Whether you have a specific project in mind or just want to have a conversation about where AI fits in your organization, I'd love to connect.</p>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="jane@company.com" />
+        </div>
+        <div class="form-group">
+          <label>Organization</label>
+          <input type="text" placeholder="Your company or organization" />
+        </div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>AI Strategy Consulting</option>
+            <option>Green Tech Advisory</option>
+            <option>Workshop or Speaking</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me a bit about your situation or what you're hoping to explore..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="button">Send Message →</button>
+        </div>
+      </div>
+      <p class="contact-alt">Prefer email? Reach me directly at <a href="mailto:hello@sustaintech.ca">hello@sustaintech.ca</a></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Sustain<span>Tech</span></div>
+    <p>© 2026 SustainTech. All rights reserved. · sustaintech.ca</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Contact form button (mailto fallback)
+    document.querySelector('.form-submit button').addEventListener('click', () => {
+      const name = document.querySelector('input[placeholder="Jane"]').value;
+      const email = document.querySelector('input[type="email"]').value;
+      const org = document.querySelector('input[placeholder="Your company or organization"]').value;
+      const interest = document.querySelector('select').value;
+      const msg = document.querySelector('textarea').value;
+      if (!email) { alert('Please enter your email address.'); return; }
+      const subject = encodeURIComponent(`SustainTech Inquiry — ${interest || 'General'}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${org}\nInterested in: ${interest}\n\n${msg}`);
+      window.location.href = `mailto:hello@sustaintech.ca?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
